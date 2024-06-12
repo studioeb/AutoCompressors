@@ -1,0 +1,7 @@
+name: AutoCompressors
+version: '${project.version}'
+main: io.github.rainpaw.autocompressors.AutoCompressors
+api-version: '1.20'
+authors: [rainpaw10]
+description: A Spigot plugin that adds highly customizable item compressors.
+website: rainpaw.github.io
