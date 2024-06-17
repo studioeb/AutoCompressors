@@ -1,5 +1,6 @@
 # This config file is where you can add your own custom compressors to the game.
 # Make each new compressor "compressor#", where # is a number incremented by 1 from the previous compressor.
+# MAKE SURE to include at least the display-name and material parameters for each compressor.
 
 compressors:
   compressor1:
@@ -13,3 +14,14 @@ compressors:
     material: 'diamond_block'
     enchant-glint: true
     stackable: false
+  compressor2:
+    display-name: 'Compressor of Automagic'
+    material: 'sculk_sensor'
+    stackable: false
+  compressor3:
+    display-name: '§cCOmP'
+    lore:
+      - "It is unknown what this item will do when right clicked..."
+    material: 'gold_ingot'
+    enchant-glint: true
+    stackable: true
