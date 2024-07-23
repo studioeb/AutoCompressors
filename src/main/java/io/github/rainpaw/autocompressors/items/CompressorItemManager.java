@@ -33,7 +33,6 @@ public class CompressorItemManager {
                                     "Not every compressor has a material section.")),
                             "The config file contains a material that does not exist."),
                     configuration.getBoolean(configPath + ".enchant-glint"),
-                    configuration.getBoolean(configPath + ".stackable"),
                     new NamespacedKey(plugin, "get-compressor-command")
             );
             compressors.add(compressor);

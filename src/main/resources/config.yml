@@ -11,22 +11,20 @@ compressors:
       - '§4  Redstone -> Block of Redstone'
       - '§6  Gold -> Block of Gold'
       - '§7  Iron -> Block of Iron'
-    material: 'diamond_block'
+    material: diamond_block
     enchant-glint: true
-    stackable: false
     compress-groups:
       group1:
-        - 'diamond'
-        - 'diamond_block'
+        start-item: diamond
+        end-item: diamond_block
+        compress-amount: 9
 
   compressor2:
     display-name: 'Compressor of Automagic'
-    material: 'sculk_sensor'
-    stackable: false
+    material: sculk_sensor
   compressor3:
     display-name: '§cCOmP'
     lore:
       - "It is unknown what this item will do when right clicked..."
-    material: 'gold_ingot'
+    material: gold_ingot
     enchant-glint: true
-    stackable: true

@@ -16,7 +16,6 @@ public class Compressor {
     private final List<String> itemLore;
     private final Material itemMaterial;
     private final boolean enchantGlint;
-    private final boolean stackable;
     private final NamespacedKey key;
 
     public ItemStack getItemStack() {
@@ -27,9 +26,6 @@ public class Compressor {
         if (enchantGlint) {
             meta.addEnchant(Enchantment.LUCK, 1, false);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        }
-        if (!stackable) {
-            meta.getPersistentDataContainer().set(key, PersistentDataType.DOUBLE, Math.random());
         }
         tempItem.setItemMeta(meta);
         return tempItem;
@@ -44,19 +40,15 @@ public class Compressor {
             meta.addEnchant(Enchantment.LUCK, 1, false);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
-        if (!stackable) {
-            meta.getPersistentDataContainer().set(key, PersistentDataType.DOUBLE, Math.random());
-        }
         tempItem.setItemMeta(meta);
         return tempItem;
     }
 
-    public Compressor(String name, List<String> lore, Material material, boolean hasEnchantGlint, boolean isStackable, NamespacedKey namespacedKey) {
+    public Compressor(String name, List<String> lore, Material material, boolean hasEnchantGlint, NamespacedKey namespacedKey) {
         displayName = name;
         itemLore = lore;
         itemMaterial = material;
         enchantGlint = hasEnchantGlint;
-        stackable = isStackable;
         key = namespacedKey;
     }
 
