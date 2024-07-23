@@ -14,6 +14,11 @@ compressors:
     material: 'diamond_block'
     enchant-glint: true
     stackable: false
+    compress-groups:
+      group1:
+        - 'diamond'
+        - 'diamond_block'
+
   compressor2:
     display-name: 'Compressor of Automagic'
     material: 'sculk_sensor'

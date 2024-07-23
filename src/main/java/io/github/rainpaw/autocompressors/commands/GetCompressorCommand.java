@@ -18,15 +18,27 @@ public class GetCompressorCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if (cmd.getName().equalsIgnoreCase("getcompressor")) {
-            if (args.length >= 1) {
+            if (args.length == 1) {
                 try {
                     int index = Integer.parseInt(args[0]);
                     player.getInventory().addItem(CompressorItemManager.getCompressor(index - 1).getItemStack());
                 } catch(IllegalArgumentException | IndexOutOfBoundsException e) {
                     player.sendMessage("§cPlease provide an integer index that is in the range of 1-" + (CompressorItemManager.getCompressorAmount()) + ".");
                 }
+            } else if (args.length >= 2) {
+                try {
+                    int index = Integer.parseInt(args[0]);
+                    int amount = Integer.parseInt(args[1]);
+                    if (amount > 512) {
+                        player.sendMessage("§cYou can't get that many compressors at once! Max: 512.");
+                    } else {
+                        player.getInventory().addItem(CompressorItemManager.getCompressor(index - 1).getItemStack(amount));
+                    }
+                } catch(IllegalArgumentException | IndexOutOfBoundsException e) {
+                    player.sendMessage("§cPlease provide an integer index that is in the range of 1-" + (CompressorItemManager.getCompressorAmount()) + " and optionally the amount of compressors you want to get.");
+                }
             } else {
-                player.sendMessage("§c/getcompressor <compressor index>");
+                player.sendMessage("§c/getcompressor <compressor index> <amount>");
             }
         }
 

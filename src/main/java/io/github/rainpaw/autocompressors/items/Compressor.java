@@ -35,6 +35,22 @@ public class Compressor {
         return tempItem;
     }
 
+    public ItemStack getItemStack(int amount) {
+        ItemStack tempItem = new ItemStack(itemMaterial, amount);
+        ItemMeta meta = tempItem.getItemMeta();
+        meta.setDisplayName(displayName);
+        meta.setLore(itemLore);
+        if (enchantGlint) {
+            meta.addEnchant(Enchantment.LUCK, 1, false);
+            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
+        if (!stackable) {
+            meta.getPersistentDataContainer().set(key, PersistentDataType.DOUBLE, Math.random());
+        }
+        tempItem.setItemMeta(meta);
+        return tempItem;
+    }
+
     public Compressor(String name, List<String> lore, Material material, boolean hasEnchantGlint, boolean isStackable, NamespacedKey namespacedKey) {
         displayName = name;
         itemLore = lore;
