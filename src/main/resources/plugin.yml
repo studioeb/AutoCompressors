@@ -18,3 +18,9 @@ commands:
     aliases: acr
     permission: autocompressors.reload
     permission-message: You don't have permission to run this command.
+  editcompressors:
+    description: Opens a GUI allowing compressors to be edited in-game.
+    usage: /<command>
+    aliases: ec
+    permission: autocompressors.editcompressors
+    permission-message: You don't have permission to run this command.

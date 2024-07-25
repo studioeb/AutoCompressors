@@ -28,3 +28,90 @@ compressors:
       - "It is unknown what this item will do when right clicked..."
     material: gold_ingot
     enchant-glint: true
+  compressor4:
+    display-name: 'test'
+    material: diamond
+  compressor5:
+    display-name: 'test'
+    material: diamond
+  compressor6:
+    display-name: 'test'
+    material: diamond
+  compressor7:
+    display-name: 'test'
+    material: redstone_dust
+  compressor8:
+    display-name: 'test'
+    material: diamond
+  compressor9:
+    display-name: 'test'
+    material: diamond
+  compressor10:
+    display-name: 'test'
+    material: diamond
+  compressor11:
+    display-name: 'test'
+    material: diamond
+  compressor12:
+    display-name: 'test'
+    material: diamond
+  compressor13:
+    display-name: 'test'
+    material: diamond
+  compressor14:
+    display-name: 'test'
+    material: diamond
+  compressor15:
+    display-name: 'test'
+    material: diamond
+  compressor16:
+    display-name: 'test'
+    material: diamond
+  compressor17:
+    display-name: 'test'
+    material: diamond
+  compressor18:
+    display-name: 'test'
+    material: diamond
+  compressor19:
+    display-name: 'test'
+    material: diamond
+  compressor20:
+    display-name: 'test'
+    material: diamond
+  compressor21:
+    display-name: 'test'
+    material: diamond
+  compressor22:
+    display-name: 'test'
+    material: diamond
+  compressor23:
+    display-name: 'test'
+    material: diamond
+  compressor24:
+    display-name: 'test'
+    material: diamond
+  compressor25:
+    display-name: 'test'
+    material: diamond
+  compressor26:
+    display-name: 'test'
+    material: diamond
+  compressor27:
+    display-name: 'test'
+    material: diamond
+  compressor28:
+    display-name: 'test'
+    material: diamond
+  compressor29:
+    display-name: 'test'
+    material: diamond
+  compressor30:
+    display-name: 'test'
+    material: diamond
+  compressor31:
+    display-name: 'test'
+    material: diamond
+  compressor32:
+    display-name: 'test'
+    material: diamond

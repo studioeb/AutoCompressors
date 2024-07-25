@@ -2,7 +2,6 @@ package io.github.rainpaw.autocompressors.items;
 
 import io.github.rainpaw.autocompressors.AutoCompressors;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public class CompressorItemManager {
                                     "Not every compressor has a material section.")),
                             "The config file contains a material that does not exist."),
                     configuration.getBoolean(configPath + ".enchant-glint"),
-                    new NamespacedKey(plugin, "get-compressor-command")
+                    index
             );
             compressors.add(compressor);
         }
@@ -47,5 +46,9 @@ public class CompressorItemManager {
     // Compressors list length getter
     public static int getCompressorAmount() {
         return compressors.size();
+    }
+
+    public static List<Compressor> getCompressorList() {
+        return compressors;
     }
 }

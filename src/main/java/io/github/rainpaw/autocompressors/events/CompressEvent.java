@@ -1,5 +1,6 @@
 package io.github.rainpaw.autocompressors.events;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,10 +17,11 @@ public class CompressEvent implements Listener {
             ItemStack item = event.getItem().getItemStack();
             Inventory playerInventory = player.getInventory();
 
-            player.sendMessage("Event triggered");
-
-            if (playerInventory.containsAtLeast(item, 64)) {
-                player.sendMessage("You have a compressable amount of the item you just picked up!");
+            if (item.getType() == Material.DIAMOND) {
+                if (playerInventory.containsAtLeast(item, 9)) {
+                    playerInventory.removeItem(new ItemStack(Material.DIAMOND, 9));
+                    playerInventory.addItem(new ItemStack(Material.DIAMOND_BLOCK, 1));
+                }
             }
         }
     }
