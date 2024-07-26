@@ -39,7 +39,7 @@ compressors:
     material: diamond
   compressor7:
     display-name: 'test'
-    material: redstone_dust
+    material: redstone
   compressor8:
     display-name: 'test'
     material: diamond

@@ -1,11 +1,11 @@
 package io.github.rainpaw.autocompressors.guis;
 
+import io.github.rainpaw.autocompressors.AutoCompressors;
 import io.github.rainpaw.autocompressors.items.Compressor;
 import io.github.rainpaw.autocompressors.items.CompressorItemManager;
 import io.github.rainpaw.autocompressors.utils.GUIUtils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +16,11 @@ public class CompressorViewGUI extends BaseGUI{
     private int numberOfPages = 0;
     private List<Compressor> currentPageCompressors = new ArrayList<>();
 
-    public CompressorViewGUI() {
+    private AutoCompressors plugin;
+
+    public CompressorViewGUI(AutoCompressors plugin) {
         super(54, "Edit Compressors");
+        this.plugin = plugin;
 
         drawInventory();
     }
@@ -51,17 +54,12 @@ public class CompressorViewGUI extends BaseGUI{
 
         for (Compressor compressor : currentPageCompressors) {
             ItemStack compressorItem = compressor.getItemStack();
-            ItemStack item = new ItemStack(compressorItem);
-            ItemMeta itemMeta = item.getItemMeta();
-            List<String> lore = new ArrayList<>();
-            if (itemMeta.hasLore()) {
-                lore = item.getItemMeta().getLore();
-            }
-            lore.add("");
-            lore.add("§aClick to edit compressor " + compressor.getIndex() + "!");
-            itemMeta.setLore(lore);
-            item.setItemMeta(itemMeta);
-            addItem(item);
+            ItemStack item = GUIUtils.appendLore(compressorItem, "", "§aClick to edit compressor " + compressor.getIndex() + "!");
+            addItem(item, player -> {
+                close(player);
+                CompressorEditGUI gui = new CompressorEditGUI(compressor, plugin, this);
+                gui.open(player);
+            });
         }
     }
 

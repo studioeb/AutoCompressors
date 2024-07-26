@@ -8,13 +8,12 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 
-public class Compressor {
+public class TempCompressor {
 
-    private final String displayName;
-    private final List<String> itemLore;
-    private final Material itemMaterial;
-    private final boolean enchantGlint;
-    private final int index;
+    private String displayName;
+    private List<String> itemLore;
+    private Material itemMaterial;
+    private boolean enchantGlint;
 
     public ItemStack getItemStack() {
         ItemStack tempItem = new ItemStack(itemMaterial);
@@ -42,34 +41,44 @@ public class Compressor {
         return tempItem;
     }
 
-    public int getIndex() {
-        return index;
-    }
-
+    /* Getters and Setters */
     public String getDisplayName() {
         return displayName;
     }
 
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
 
-
-    public List<String> getItemLore() {
+    public List<String> getLore() {
         return itemLore;
+    }
+
+    public void setLore(List<String> itemLore) {
+        this.itemLore = itemLore;
     }
 
     public Material getMaterial() {
         return itemMaterial;
     }
 
+    public void setMaterial(Material itemMaterial) {
+        this.itemMaterial = itemMaterial;
+    }
+
     public boolean hasEnchantGlint() {
         return enchantGlint;
     }
 
-    public Compressor(String name, List<String> lore, Material material, boolean hasEnchantGlint, int index) {
-        displayName = name;
-        itemLore = lore;
-        itemMaterial = material;
-        enchantGlint = hasEnchantGlint;
-        this.index = index;
+    public void setEnchantGlint(boolean enchantGlint) {
+        this.enchantGlint = enchantGlint;
+    }
+
+    public TempCompressor(Compressor compressor) {
+        displayName = compressor.getDisplayName();
+        itemLore = compressor.getItemLore();
+        itemMaterial = compressor.getMaterial();
+        enchantGlint = compressor.hasEnchantGlint();
     }
 
 }

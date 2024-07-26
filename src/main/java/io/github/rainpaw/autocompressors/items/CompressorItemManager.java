@@ -12,6 +12,8 @@ public class CompressorItemManager {
 
     private static final List<Compressor> compressors = new ArrayList<>();
 
+    private static TempCompressor tempCompressor;
+
     public static void initializeItems(AutoCompressors plugin) {
         compressors.clear();
 
@@ -41,6 +43,15 @@ public class CompressorItemManager {
     // Compressor getter
     public static Compressor getCompressor(int index) {
         return compressors.get(index);
+    }
+
+    public static TempCompressor getTempCompressor() {
+        return tempCompressor;
+    }
+
+    public static TempCompressor getNewTempCompressor(Compressor compressor) {
+        tempCompressor = new TempCompressor(compressor);
+        return tempCompressor;
     }
 
     // Compressors list length getter

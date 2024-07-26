@@ -6,10 +6,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class GUIUtils {
 
@@ -52,6 +49,36 @@ public class GUIUtils {
         meta.setDisplayName(name);
         meta.setLore(Arrays.asList(lore));
 
+        item.setItemMeta(meta);
+
+        return item;
+    }
+
+    public static ItemStack createGuiItem(String name, Material mat, List<String> lore) {
+        final ItemStack item = new ItemStack(mat, 1);
+        final ItemMeta meta = item.getItemMeta();
+
+        meta.setDisplayName(name);
+        meta.setLore(lore);
+
+        item.setItemMeta(meta);
+
+        return item;
+    }
+
+    public static ItemStack appendLore(ItemStack itemStack, String... addedLore) {
+        ItemStack item = new ItemStack(itemStack);
+
+        ItemMeta meta = item.getItemMeta();
+
+        List<String> lore = new ArrayList<>();
+        if (meta.hasLore()) {
+            lore = meta.getLore();
+        }
+
+        lore.addAll(Arrays.asList(addedLore));
+
+        meta.setLore(lore);
         item.setItemMeta(meta);
 
         return item;

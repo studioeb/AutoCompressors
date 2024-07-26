@@ -25,7 +25,7 @@ public final class AutoCompressors extends JavaPlugin {
 
         getCommand("getcompressor").setExecutor(new GetCompressorCommand());
         getCommand("autocompressorsreload").setExecutor(new ReloadCommand(this));
-        getCommand("editcompressors").setExecutor(new EditCompressorsCommand());
+        getCommand("editcompressors").setExecutor(new EditCompressorsCommand(this));
 
         LOGGER.info("Plugin is enabled.");
     }

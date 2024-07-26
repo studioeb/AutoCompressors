@@ -60,6 +60,16 @@ public abstract class BaseGUI {
         GUIUtils.openInventories.remove(player.getUniqueId());
     }
 
+    public void delete() {
+        for (Player player : Bukkit.getOnlinePlayers()){
+            UUID u = GUIUtils.openInventories.get(player.getUniqueId());
+            if (u.equals(getUuid())){
+                player.closeInventory();
+            }
+        }
+        GUIUtils.inventoriesByUUID.remove(getUuid());
+    }
+
     // GETTERS //
     public Inventory getInventory() {
         return inventory;
