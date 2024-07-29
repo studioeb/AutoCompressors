@@ -16,10 +16,10 @@ public class CompressorViewGUI extends BaseGUI{
     private int numberOfPages = 0;
     private List<Compressor> currentPageCompressors = new ArrayList<>();
 
-    private AutoCompressors plugin;
+    private final AutoCompressors plugin;
 
     public CompressorViewGUI(AutoCompressors plugin) {
-        super(54, "Edit Compressors");
+        super(54, "Edit Compressors", GUIUtils.GUIType.NORMAL);
         this.plugin = plugin;
 
         drawInventory();
@@ -57,8 +57,8 @@ public class CompressorViewGUI extends BaseGUI{
             ItemStack item = GUIUtils.appendLore(compressorItem, "", "§aClick to edit compressor " + compressor.getIndex() + "!");
             addItem(item, player -> {
                 close(player);
-                CompressorEditGUI gui = new CompressorEditGUI(compressor, plugin, this);
-                gui.open(player);
+                CompressorEditGUI editGUI = new CompressorEditGUI(compressor, plugin, this);
+                editGUI.open(player);
             });
         }
     }

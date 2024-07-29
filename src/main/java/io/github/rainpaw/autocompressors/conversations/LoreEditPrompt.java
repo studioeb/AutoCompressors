@@ -8,30 +8,34 @@ import org.bukkit.conversations.Prompt;
 import org.bukkit.conversations.StringPrompt;
 import org.bukkit.entity.Player;
 
-public class DisplayNamePrompt extends StringPrompt {
+import java.util.List;
 
-    private final Player player;
+public class LoreEditPrompt extends StringPrompt {
 
-    private final ModifiableCompressor compressor;
-
+    private final int lineNumber;
     private final CompressorEditGUI editGUI;
+    private final Player player;
+    private final ModifiableCompressor compressor;
 
     @Override
     public String getPromptText(ConversationContext context) {
-        return "§aEnter new display name, with \"&\" for color codes, or type \"exit\" to quit:";
+        return "§aEnter new lore for line " + lineNumber + ", with \"&\" for color codes, or type \"exit\" to exit:";
     }
 
     @Override
     public Prompt acceptInput(ConversationContext context, String input) {
-        compressor.setDisplayName(ChatColor.translateAlternateColorCodes('&', input));
+        List<String> lore = compressor.getLore();
+        lore.set(lineNumber - 1, ChatColor.translateAlternateColorCodes('&', input));
+        compressor.setLore(lore);
         editGUI.refreshGUI();
         editGUI.open(player);
         return null;
     }
 
-    public DisplayNamePrompt(Player player, ModifiableCompressor compressor, CompressorEditGUI editGUI) {
+    public LoreEditPrompt(int line, Player player, ModifiableCompressor compressor, CompressorEditGUI editGUI) {
         this.editGUI = editGUI;
         this.player = player;
         this.compressor = compressor;
+        lineNumber = line;
     }
 }

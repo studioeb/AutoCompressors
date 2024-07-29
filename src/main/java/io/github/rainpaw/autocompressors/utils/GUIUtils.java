@@ -12,8 +12,14 @@ public class GUIUtils {
 
     private static final ItemStack backgroundItem = createGuiItem("§r",Material.GRAY_STAINED_GLASS_PANE, 1);
 
-    public final static Map<UUID, BaseGUI> inventoriesByUUID = new HashMap<>(); // Inv uuid + instance
-    public final static Map<UUID, UUID> openInventories = new HashMap<>(); // Player UUID + inv UUID
+    public static final Map<UUID, BaseGUI> inventoriesByUUID = new HashMap<>(); // Inv uuid + instance
+    public static final Map<UUID, UUID> openInventories = new HashMap<>(); // Player UUID + inv UUID
+
+
+    public enum GUIType {
+        NORMAL,
+        MATERIAL_ENTER
+    }
 
     public static void drawGrayGlassBorder(Inventory inv) {
         final int invRows = inv.getSize() / 9;
@@ -28,6 +34,26 @@ public class GUIUtils {
                 inv.setItem((row * 9) + 8, backgroundItem);
             }
         }
+    }
+
+    public static void fillAllSlots(Inventory inv, ItemStack item) {
+        for (int slot = 0; slot < inv.getSize(); slot++) {
+            inv.setItem(slot, item);
+        }
+    }
+
+    public static String readable(String string) {
+        String lowerString = string.toLowerCase();
+        String[] words = lowerString.split("_");
+        StringBuilder sb = new StringBuilder();
+
+        for (String word : words) {
+            sb.append(word.substring(0, 1).toUpperCase()).append(word.substring(1)).append(" ");
+        }
+
+        sb.deleteCharAt(sb.length() - 1);
+
+        return sb.toString();
     }
 
     public static ItemStack createGuiItem(String name, Material mat, int amount, String... lore) {

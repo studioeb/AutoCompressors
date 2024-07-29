@@ -6,6 +6,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Compressor {
@@ -14,6 +15,7 @@ public class Compressor {
     private final List<String> itemLore;
     private final Material itemMaterial;
     private final boolean enchantGlint;
+    private final CompressorItemManager.CompressorLocations location;
     private final int index;
 
     public ItemStack getItemStack() {
@@ -42,6 +44,7 @@ public class Compressor {
         return tempItem;
     }
 
+    /* Getters for Values */
     public int getIndex() {
         return index;
     }
@@ -50,9 +53,7 @@ public class Compressor {
         return displayName;
     }
 
-
-
-    public List<String> getItemLore() {
+    public List<String> getLore() {
         return itemLore;
     }
 
@@ -64,11 +65,17 @@ public class Compressor {
         return enchantGlint;
     }
 
-    public Compressor(String name, List<String> lore, Material material, boolean hasEnchantGlint, int index) {
+    public CompressorItemManager.CompressorLocations getLocation() {
+        return location;
+    }
+
+    /* Constructor */
+    public Compressor(String name, List<String> lore, Material material, boolean hasEnchantGlint, CompressorItemManager.CompressorLocations compressorLocation, int index) {
         displayName = name;
         itemLore = lore;
         itemMaterial = material;
         enchantGlint = hasEnchantGlint;
+        location = compressorLocation;
         this.index = index;
     }
 

@@ -1,12 +1,15 @@
 package io.github.rainpaw.autocompressors.events;
 
 import io.github.rainpaw.autocompressors.guis.BaseGUI;
+import io.github.rainpaw.autocompressors.guis.MaterialEnterGUI;
 import io.github.rainpaw.autocompressors.utils.GUIUtils;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.UUID;
@@ -16,6 +19,7 @@ public class GUIEvents implements Listener {
     @EventHandler
     public void onClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player)) { return; }
+        if (event.getClickedInventory() == null) { return; }
 
         final Player player = (Player) event.getWhoClicked();
         final UUID playerUUID = player.getUniqueId();
@@ -24,10 +28,17 @@ public class GUIEvents implements Listener {
         if (inventoryUUID != null) {
             event.setCancelled(true);
             BaseGUI gui = GUIUtils.inventoriesByUUID.get(inventoryUUID);
-            BaseGUI.InputAction action = gui.getActions().get(event.getSlot());
-
-            if (action != null) {
-                action.click(player);
+            if (event.getClickedInventory().getType().equals(InventoryType.PLAYER) && gui.getGuiType().equals(GUIUtils.GUIType.MATERIAL_ENTER)) {
+                if (event.getCurrentItem() != null && event.getCurrentItem().getType() != Material.AIR) {
+                    MaterialEnterGUI matGUI = (MaterialEnterGUI) gui;
+                    matGUI.getNewMaterial(event.getCurrentItem().getType());
+                }
+            }
+            if (!event.getClickedInventory().getType().equals(InventoryType.PLAYER)) {
+                BaseGUI.InputAction action = gui.getActions().get(event.getSlot());
+                if (action != null) {
+                    action.click(player);
+                }
             }
         }
     }
@@ -42,7 +53,7 @@ public class GUIEvents implements Listener {
 
     @EventHandler
     public void onDisconnect(PlayerQuitEvent event) {
-        final Player player = (Player) event.getPlayer();
+        final Player player = event.getPlayer();
         final UUID playerUUID = player.getUniqueId();
 
         GUIUtils.openInventories.remove(playerUUID);

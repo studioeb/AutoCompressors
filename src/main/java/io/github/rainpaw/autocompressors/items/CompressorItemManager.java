@@ -12,7 +12,10 @@ public class CompressorItemManager {
 
     private static final List<Compressor> compressors = new ArrayList<>();
 
-    private static TempCompressor tempCompressor;
+    public enum CompressorLocations {
+        INVENTORY,
+        OFFHAND
+    }
 
     public static void initializeItems(AutoCompressors plugin) {
         compressors.clear();
@@ -24,16 +27,17 @@ public class CompressorItemManager {
 
             // Add §r (reset style) to beginning of each element in lore list
             List<String> lore = configuration.getStringList(configPath + ".lore");
-            lore.replaceAll(s -> "§r"+s);
+            lore.replaceAll(s -> "§7"+s);
 
             Compressor compressor = new Compressor(
-                    "§r" + configuration.getString(configPath + ".display-name"),
+                    "§f" + configuration.getString(configPath + ".display-name"),
                     lore,
                     Objects.requireNonNull(Material.matchMaterial(
                             Objects.requireNonNull(configuration.getString(configPath + ".material"),
                                     "Not every compressor has a material section.")),
                             "The config file contains a material that does not exist."),
                     configuration.getBoolean(configPath + ".enchant-glint"),
+                    CompressorLocations.valueOf(configuration.getString(configPath + ".location", "INVENTORY").toUpperCase()),
                     index
             );
             compressors.add(compressor);
@@ -43,15 +47,6 @@ public class CompressorItemManager {
     // Compressor getter
     public static Compressor getCompressor(int index) {
         return compressors.get(index);
-    }
-
-    public static TempCompressor getTempCompressor() {
-        return tempCompressor;
-    }
-
-    public static TempCompressor getNewTempCompressor(Compressor compressor) {
-        tempCompressor = new TempCompressor(compressor);
-        return tempCompressor;
     }
 
     // Compressors list length getter

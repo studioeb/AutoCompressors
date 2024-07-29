@@ -13,11 +13,13 @@ import java.util.UUID;
 public abstract class BaseGUI {
     private final Inventory inventory;
     private final UUID uuid;
+    private final GUIUtils.GUIType guiType;
     private final Map<Integer, InputAction> actions = new HashMap<>();
 
     // CONSTRUCTOR //
-    public BaseGUI(int invSize, String invName) {
+    public BaseGUI(int invSize, String invName, GUIUtils.GUIType guiType) {
         uuid = UUID.randomUUID();
+        this.guiType = guiType;
         inventory = Bukkit.createInventory(null, invSize, invName);
         GUIUtils.inventoriesByUUID.put(uuid, this);
     }
@@ -60,15 +62,7 @@ public abstract class BaseGUI {
         GUIUtils.openInventories.remove(player.getUniqueId());
     }
 
-    public void delete() {
-        for (Player player : Bukkit.getOnlinePlayers()){
-            UUID u = GUIUtils.openInventories.get(player.getUniqueId());
-            if (u.equals(getUuid())){
-                player.closeInventory();
-            }
-        }
-        GUIUtils.inventoriesByUUID.remove(getUuid());
-    }
+
 
     // GETTERS //
     public Inventory getInventory() {
@@ -81,5 +75,9 @@ public abstract class BaseGUI {
 
     public Map<Integer, InputAction> getActions() {
         return actions;
+    }
+
+    public GUIUtils.GUIType getGuiType() {
+        return guiType;
     }
 }

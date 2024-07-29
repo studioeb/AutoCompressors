@@ -6,14 +6,16 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class TempCompressor {
+public class ModifiableCompressor {
 
     private String displayName;
     private List<String> itemLore;
     private Material itemMaterial;
     private boolean enchantGlint;
+    private CompressorItemManager.CompressorLocations location;
 
     public ItemStack getItemStack() {
         ItemStack tempItem = new ItemStack(itemMaterial);
@@ -41,7 +43,7 @@ public class TempCompressor {
         return tempItem;
     }
 
-    /* Getters and Setters */
+    /* Getters and Setters for Values */
     public String getDisplayName() {
         return displayName;
     }
@@ -74,11 +76,29 @@ public class TempCompressor {
         this.enchantGlint = enchantGlint;
     }
 
-    public TempCompressor(Compressor compressor) {
-        displayName = compressor.getDisplayName();
-        itemLore = compressor.getItemLore();
-        itemMaterial = compressor.getMaterial();
-        enchantGlint = compressor.hasEnchantGlint();
+    public CompressorItemManager.CompressorLocations getLocation() {
+        return location;
     }
 
+    public void setLocation(CompressorItemManager.CompressorLocations location) {
+        this.location = location;
+    }
+
+    /* Constructor */
+    public ModifiableCompressor(String name, List<String> lore, Material material, boolean hasEnchantGlint, CompressorItemManager.CompressorLocations compressorLocation) {
+        displayName = name;
+        itemLore = lore;
+        itemMaterial = material;
+        enchantGlint = hasEnchantGlint;
+        location = compressorLocation;
+    }
+
+    public ModifiableCompressor(Compressor compressor) {
+        displayName = compressor.getDisplayName();
+        itemLore = new ArrayList<>();
+        itemLore.addAll(compressor.getLore());
+        itemMaterial = compressor.getMaterial();
+        enchantGlint = compressor.hasEnchantGlint();
+        location = compressor.getLocation();
+    }
 }

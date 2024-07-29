@@ -13,6 +13,7 @@ compressors:
       - '§7  Iron -> Block of Iron'
     material: diamond_block
     enchant-glint: true
+    location: OFFHAND
     compress-groups:
       group1:
         start-item: diamond
