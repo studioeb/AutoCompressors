@@ -1,6 +1,8 @@
 package io.github.rainpaw.autocompressors.utils;
 
 import io.github.rainpaw.autocompressors.guis.BaseGUI;
+import io.github.rainpaw.autocompressors.items.Compressor;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -19,6 +21,13 @@ public class GUIUtils {
     public enum GUIType {
         NORMAL,
         MATERIAL_ENTER
+    }
+
+    public enum SortType {
+        A_Z,
+        Z_A,
+        INDEX_ASCENDING,
+        INDEX_DESCENDING
     }
 
     public static void drawGrayGlassBorder(Inventory inv) {
@@ -42,6 +51,7 @@ public class GUIUtils {
         }
     }
 
+    /* General Methods */
     public static String readable(String string) {
         String lowerString = string.toLowerCase();
         String[] words = lowerString.split("_");
@@ -56,6 +66,31 @@ public class GUIUtils {
         return sb.toString();
     }
 
+    public static List<Compressor> sortedCompressorsAZ(List<Compressor> list) {
+        List<Compressor> sortedList = new ArrayList<>(list);
+
+        sortedList.sort((comp1, comp2) -> ChatColor.stripColor(comp1.getDisplayName()).compareToIgnoreCase(ChatColor.stripColor(comp2.getDisplayName())));
+
+        return sortedList;
+    }
+
+    public static List<Compressor> sortedCompressorsZA(List<Compressor> list) {
+        List<Compressor> sortedList = new ArrayList<>(list);
+
+        sortedList.sort((comp1, comp2) -> -ChatColor.stripColor(comp1.getDisplayName()).compareToIgnoreCase(ChatColor.stripColor(comp2.getDisplayName())));
+
+        return sortedList;
+    }
+
+    public static List<Compressor> sortedCompressorsDescendingIndex(List<Compressor> list) {
+        List<Compressor> sortedList = new ArrayList<>(list);
+
+        sortedList.sort(Comparator.comparing(Compressor::getIndex).reversed());
+
+        return sortedList;
+    }
+
+    /* GUI Methods */
     public static ItemStack createGuiItem(String name, Material mat, int amount, String... lore) {
         final ItemStack item = new ItemStack(mat, amount);
         final ItemMeta meta = item.getItemMeta();

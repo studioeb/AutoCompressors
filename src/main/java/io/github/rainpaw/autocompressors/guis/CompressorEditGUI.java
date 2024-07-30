@@ -75,29 +75,32 @@ public class CompressorEditGUI extends BaseGUI {
             refreshGUI();
         });
         setItem(15, GUIUtils.createGuiItem("§aLocation in Inventory", Material.SPYGLASS, createLocationEditLore()), player -> {
-            if (locationsIterator.hasNext()) {
-                compressor.setLocation(locationsIterator.next());
-            } else {
+            if (!locationsIterator.hasNext()) {
                 locationsIterator = locationsList.listIterator();
-                compressor.setLocation(locationsIterator.next());
             }
+            compressor.setLocation(locationsIterator.next());
+
             refreshGUI();
         });
         setItem(16, GUIUtils.createGuiItem("§aCompressions", Material.PAINTING, "§7Current compressions:", "", "§aClick to edit!"));
     }
 
-    public List<String> createLoreEditLore() {
+    private List<String> createLoreEditLore() {
         List<String> currentLore = new ArrayList<>();
         currentLore.add("§7The item's description.");
         currentLore.add("");
         currentLore.add("§7Current lore:");
-        currentLore.addAll(compressor.getLore());
+        if (!compressor.getLore().isEmpty()) {
+            currentLore.addAll(compressor.getLore());
+        } else {
+            currentLore.add("§cThis item doesn't have any lore!");
+        }
         currentLore.add("");
         currentLore.add("§aClick to change!");
         return currentLore;
     }
 
-    public List<String> createLocationEditLore() {
+    private List<String> createLocationEditLore() {
         List<String> currentLore = new ArrayList<>();
         currentLore.add("§7The place in the player inventory where");
         currentLore.add("§7this compressor will work.");

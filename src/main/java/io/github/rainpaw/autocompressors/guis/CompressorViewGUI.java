@@ -8,7 +8,9 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.ListIterator;
 
 public class CompressorViewGUI extends BaseGUI{
 
@@ -16,16 +18,25 @@ public class CompressorViewGUI extends BaseGUI{
     private int numberOfPages = 0;
     private List<Compressor> currentPageCompressors = new ArrayList<>();
 
+    private GUIUtils.SortType sortType = GUIUtils.SortType.INDEX_ASCENDING;
+    private final List<GUIUtils.SortType> sortTypeList = Arrays.asList(GUIUtils.SortType.values());
+    private ListIterator<GUIUtils.SortType> sortTypeIterator;
+
     private final AutoCompressors plugin;
 
     public CompressorViewGUI(AutoCompressors plugin) {
         super(54, "Edit Compressors", GUIUtils.GUIType.NORMAL);
         this.plugin = plugin;
+        sortTypeIterator = sortTypeList.listIterator(sortTypeList.indexOf(sortType));
+
+        // TODO: Test this
+        sortTypeIterator = sortTypeIterator.hasNext() ? sortTypeIterator : sortTypeList.listIterator();
+        sortTypeIterator.next();
 
         drawInventory();
     }
 
-    // ITEM ACTION FUNCTIONS //
+    /* ITEM ACTION FUNCTIONS */
     public void nextPage() {
         pageNumber += 1;
         drawInventory();
@@ -36,7 +47,7 @@ public class CompressorViewGUI extends BaseGUI{
         drawInventory();
     }
 
-    // DRAWING FUNCTIONS //
+    /* DRAWING FUNCTIONS */
     public void drawInventory() {
         refreshPages();
 
@@ -52,6 +63,14 @@ public class CompressorViewGUI extends BaseGUI{
             setItem(47, GUIUtils.createGuiItem("§aPrevious Page", Material.ARROW, "§7(" + pageNumber + "/" + numberOfPages + ")"), player -> previousPage());
         }
 
+        setItem(45, GUIUtils.createGuiItem("§aFilter", Material.HOPPER, filterLore()), player -> {
+            if (!sortTypeIterator.hasNext()) {
+                sortTypeIterator = sortTypeList.listIterator();
+            }
+            sortType = sortTypeIterator.next();
+            drawInventory();
+        });
+
         for (Compressor compressor : currentPageCompressors) {
             ItemStack compressorItem = compressor.getItemStack();
             ItemStack item = GUIUtils.appendLore(compressorItem, "", "§aClick to edit compressor " + compressor.getIndex() + "!");
@@ -65,7 +84,23 @@ public class CompressorViewGUI extends BaseGUI{
 
     public void refreshPages() {
         final int openCompressorSlots = 28;
-        List<Compressor> compressorList = CompressorItemManager.getCompressorList();
+
+        List<Compressor> compressorList;
+
+        switch (sortType) {
+            case A_Z:
+                compressorList = GUIUtils.sortedCompressorsAZ(CompressorItemManager.getCompressorList());
+                break;
+            case Z_A:
+                compressorList = GUIUtils.sortedCompressorsZA(CompressorItemManager.getCompressorList());
+                break;
+            case INDEX_DESCENDING:
+                compressorList = GUIUtils.sortedCompressorsDescendingIndex(CompressorItemManager.getCompressorList());
+                break;
+            default:
+                compressorList = CompressorItemManager.getCompressorList();
+        }
+
         numberOfPages = (int) Math.ceil(compressorList.size() / (double) openCompressorSlots);
 
         if (pageNumber == numberOfPages) {
@@ -73,5 +108,15 @@ public class CompressorViewGUI extends BaseGUI{
         } else {
             currentPageCompressors = compressorList.subList(openCompressorSlots * (pageNumber - 1), (openCompressorSlots * (pageNumber - 1)) + openCompressorSlots);
         }
+    }
+
+    private List<String> filterLore() {
+        List<String> currentLore = new ArrayList<>();
+
+        for (GUIUtils.SortType value : sortTypeList) {
+            currentLore.add((sortType.equals(value) ? "§a▶ " : "§f  ") + GUIUtils.readable(value.toString()));
+        }
+
+        return currentLore;
     }
 }
