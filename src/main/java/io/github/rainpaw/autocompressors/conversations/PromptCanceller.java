@@ -6,18 +6,20 @@ import org.bukkit.conversations.ConversationCanceller;
 import org.bukkit.conversations.ConversationContext;
 import org.bukkit.entity.Player;
 
+import javax.annotation.Nonnull;
+
 public class PromptCanceller implements ConversationCanceller {
 
     private final Player player;
     private final BaseGUI gui;
 
     @Override
-    public void setConversation(Conversation conversation) {
+    public void setConversation(@Nonnull Conversation conversation) {
         
     }
 
     @Override
-    public boolean cancelBasedOnInput(ConversationContext context, String input) {
+    public boolean cancelBasedOnInput(@Nonnull ConversationContext context, String input) {
         if (input.equalsIgnoreCase("exit")) {
             gui.open(player);
             return true;
@@ -26,7 +28,7 @@ public class PromptCanceller implements ConversationCanceller {
         }
     }
 
-    @Override
+    @Override @Nonnull
     public ConversationCanceller clone() {
         ConversationCanceller conversationCanceller;
         try {

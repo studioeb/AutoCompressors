@@ -6,6 +6,8 @@ import org.bukkit.conversations.NumericPrompt;
 import org.bukkit.conversations.Prompt;
 import org.bukkit.entity.Player;
 
+import javax.annotation.Nonnull;
+
 public class ItemAmountPrompt extends NumericPrompt {
 
     private final String itemType;
@@ -13,7 +15,7 @@ public class ItemAmountPrompt extends NumericPrompt {
     private final Player player;
 
     @Override
-    protected Prompt acceptValidatedInput(ConversationContext context, Number input) {
+    protected Prompt acceptValidatedInput(@Nonnull ConversationContext context, @Nonnull Number input) {
         if (itemType.equals("start")) {
             editGUI.setStartItemAmount((int) input);
         } else {
@@ -24,13 +26,13 @@ public class ItemAmountPrompt extends NumericPrompt {
         return null;
     }
 
-    @Override
-    public String getPromptText(ConversationContext context) {
+    @Override @Nonnull
+    public String getPromptText(@Nonnull ConversationContext context) {
         return "§aEnter the amount of the " + itemType + " item, or type \"exit\" to exit:";
     }
 
     @Override
-    protected boolean isInputValid(ConversationContext context, String input) {
+    protected boolean isInputValid(@Nonnull ConversationContext context, @Nonnull String input) {
         try {
             int number = Integer.parseInt(input);
             return number > 0;
@@ -40,7 +42,7 @@ public class ItemAmountPrompt extends NumericPrompt {
     }
 
     @Override
-    protected String getFailedValidationText(ConversationContext context, Number invalidInput) {
+    protected String getFailedValidationText(@Nonnull ConversationContext context, @Nonnull Number invalidInput) {
         return "§cPlease enter a number greater than 0.";
     }
 

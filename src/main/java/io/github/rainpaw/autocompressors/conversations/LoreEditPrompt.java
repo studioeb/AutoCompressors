@@ -7,14 +7,16 @@ import org.bukkit.conversations.Prompt;
 import org.bukkit.conversations.StringPrompt;
 import org.bukkit.entity.Player;
 
+import javax.annotation.Nonnull;
+
 public class LoreEditPrompt extends StringPrompt {
 
     private final int lineNumber;
     private final CompressorEditGUI editGUI;
     private final Player player;
 
-    @Override
-    public String getPromptText(ConversationContext context) {
+    @Override @Nonnull
+    public String getPromptText(@Nonnull ConversationContext context) {
         if (lineNumber == 0) {
             return "§aEnter lore for the new line, with \"&\" for color codes, or type \"exit\" to exit:";
         } else if (lineNumber < 0) {
@@ -25,7 +27,7 @@ public class LoreEditPrompt extends StringPrompt {
     }
 
     @Override
-    public Prompt acceptInput(ConversationContext context, String input) {
+    public Prompt acceptInput(@Nonnull ConversationContext context, String input) {
         if (lineNumber < 0 && input.equalsIgnoreCase("y")) {
             editGUI.deleteLoreAtLine(Math.abs(lineNumber) - 1);
         } else if (lineNumber < 0) {
