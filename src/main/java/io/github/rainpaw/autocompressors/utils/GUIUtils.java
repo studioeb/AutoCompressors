@@ -20,14 +20,25 @@ public class GUIUtils {
 
     public enum GUIType {
         NORMAL,
-        MATERIAL_ENTER
+        MATERIAL_ENTER,
+        ITEM_ENTER
     }
 
-    public enum SortType {
+    public enum ViewSortType {
         A_Z,
         Z_A,
         INDEX_ASCENDING,
         INDEX_DESCENDING
+    }
+
+    public enum CompressionViewSortType {
+        INDEX_ASCENDING,
+        INDEX_DESCENDING
+    }
+
+    public enum GUIMode {
+        CREATE,
+        EDIT
     }
 
     public static void drawGrayGlassBorder(Inventory inv) {
@@ -52,6 +63,18 @@ public class GUIUtils {
     }
 
     /* General Methods */
+    public static String getItemName(ItemStack item) {
+        if (item.hasItemMeta()) {
+            if (item.getItemMeta().hasDisplayName()) {
+                return item.getItemMeta().getDisplayName();
+            } else {
+                return "§fUnnamed Item";
+            }
+        } else {
+            return "§f" + readable(item.getType().toString());
+        }
+    }
+
     public static String readable(String string) {
         String lowerString = string.toLowerCase();
         String[] words = lowerString.split("_");

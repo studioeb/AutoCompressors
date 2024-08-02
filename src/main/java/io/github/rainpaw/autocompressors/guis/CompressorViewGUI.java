@@ -5,6 +5,7 @@ import io.github.rainpaw.autocompressors.items.Compressor;
 import io.github.rainpaw.autocompressors.items.CompressorItemManager;
 import io.github.rainpaw.autocompressors.utils.GUIUtils;
 import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -18,9 +19,11 @@ public class CompressorViewGUI extends BaseGUI{
     private int numberOfPages = 0;
     private List<Compressor> currentPageCompressors = new ArrayList<>();
 
-    private GUIUtils.SortType sortType = GUIUtils.SortType.INDEX_ASCENDING;
-    private final List<GUIUtils.SortType> sortTypeList = Arrays.asList(GUIUtils.SortType.values());
-    private ListIterator<GUIUtils.SortType> sortTypeIterator;
+    private boolean deleteMode = false;
+
+    private GUIUtils.ViewSortType sortType = GUIUtils.ViewSortType.INDEX_ASCENDING;
+    private final List<GUIUtils.ViewSortType> sortTypeList = Arrays.asList(GUIUtils.ViewSortType.values());
+    private ListIterator<GUIUtils.ViewSortType> sortTypeIterator;
 
     private final AutoCompressors plugin;
 
@@ -29,26 +32,25 @@ public class CompressorViewGUI extends BaseGUI{
         this.plugin = plugin;
         sortTypeIterator = sortTypeList.listIterator(sortTypeList.indexOf(sortType));
 
-        // TODO: Test this
         sortTypeIterator = sortTypeIterator.hasNext() ? sortTypeIterator : sortTypeList.listIterator();
         sortTypeIterator.next();
 
-        drawInventory();
+        refreshGUI();
     }
 
     /* ITEM ACTION FUNCTIONS */
-    public void nextPage() {
+    private void nextPage() {
         pageNumber += 1;
-        drawInventory();
+        refreshGUI();
     }
 
-    public void previousPage() {
+    private void previousPage() {
         pageNumber -= 1;
-        drawInventory();
+        refreshGUI();
     }
 
     /* DRAWING FUNCTIONS */
-    public void drawInventory() {
+    public void refreshGUI() {
         refreshPages();
 
         getActions().clear();
@@ -68,17 +70,44 @@ public class CompressorViewGUI extends BaseGUI{
                 sortTypeIterator = sortTypeList.listIterator();
             }
             sortType = sortTypeIterator.next();
-            drawInventory();
+            refreshGUI();
+        });
+
+        if (deleteMode) {
+            setItem(46, GUIUtils.createGuiItem("§cExit Deletion Mode", Material.RED_TERRACOTTA, "§7Exits the mode that allows compressor", "§7deletion.", "", "§cClick to exit!"), player -> {
+                deleteMode = false;
+                refreshGUI();
+            });
+        } else {
+            setItem(46, GUIUtils.createGuiItem("§cDelete Compressors", Material.RED_TERRACOTTA, "§7Allows you to delete certain compressors.", "", "§cClick to open!"), player -> {
+                deleteMode = true;
+                refreshGUI();
+            });
+        }
+
+        setItem(52, GUIUtils.createGuiItem("§aCreate New Compressor", Material.GREEN_TERRACOTTA, "§7Creates a new compressor and opens an", "§7editing GUI.", "", "§aClick to create!"), player -> {
+            deleteMode = false;
+            CompressorEditGUI editGUI = new CompressorEditGUI(null, CompressorItemManager.getCompressorAmount(), plugin, this, GUIUtils.GUIMode.CREATE);
+            close(player);
+            editGUI.open(player);
         });
 
         for (Compressor compressor : currentPageCompressors) {
-            ItemStack compressorItem = compressor.getItemStack();
-            ItemStack item = GUIUtils.appendLore(compressorItem, "", "§aClick to edit compressor " + compressor.getIndex() + "!");
-            addItem(item, player -> {
-                close(player);
-                CompressorEditGUI editGUI = new CompressorEditGUI(compressor, plugin, this);
-                editGUI.open(player);
-            });
+            if (deleteMode) {
+                addItem(GUIUtils.appendLore(GUIUtils.createGuiItem("§cDelete " + compressor.getDisplayName(), Material.RED_TERRACOTTA, compressor.getLore()), "", "§cClick to delete!"), player -> {
+                    ConfirmGUI gui = new ConfirmGUI(null, this, () -> deleteCompressor(compressor.getIndex()));
+                    close(player);
+                    gui.open(player);
+                });
+            } else {
+                ItemStack compressorItem = compressor.getItemStack();
+                ItemStack item = GUIUtils.appendLore(compressorItem, "", "§aClick to edit compressor " + compressor.getDisplayIndex() + "!");
+                addItem(item, player -> {
+                    CompressorEditGUI editGUI = new CompressorEditGUI(compressor, compressor.getIndex(), plugin, this, GUIUtils.GUIMode.EDIT);
+                    close(player);
+                    editGUI.open(player);
+                });
+            }
         }
     }
 
@@ -103,6 +132,10 @@ public class CompressorViewGUI extends BaseGUI{
 
         numberOfPages = (int) Math.ceil(compressorList.size() / (double) openCompressorSlots);
 
+        if (numberOfPages == 0) {
+            numberOfPages = 1;
+        }
+
         if (pageNumber == numberOfPages) {
             currentPageCompressors = compressorList.subList(openCompressorSlots * (pageNumber - 1), compressorList.size());
         } else {
@@ -113,10 +146,44 @@ public class CompressorViewGUI extends BaseGUI{
     private List<String> filterLore() {
         List<String> currentLore = new ArrayList<>();
 
-        for (GUIUtils.SortType value : sortTypeList) {
-            currentLore.add((sortType.equals(value) ? "§a▶ " : "§f  ") + GUIUtils.readable(value.toString()));
+        for (GUIUtils.ViewSortType value : sortTypeList) {
+            switch (value) {
+                case A_Z:
+                    currentLore.add((sortType.equals(value) ? "§a▶ " : "§f  ") + "A-Z");
+                    break;
+                case Z_A:
+                    currentLore.add((sortType.equals(value) ? "§a▶ " : "§f  ") + "Z-A");
+                    break;
+                default:
+                    currentLore.add((sortType.equals(value) ? "§a▶ " : "§f  ") + GUIUtils.readable(value.toString()));
+            }
         }
 
         return currentLore;
+    }
+
+    public void deleteCompressor(int index) {
+        List<Compressor> compressorList = CompressorItemManager.getCompressorList();
+        compressorList.remove(index);
+
+        // Resets indices of compressors
+        for (int i = 0; i < compressorList.size(); i++) {
+            Compressor comp = compressorList.get(i);
+            CompressorItemManager.setCompressor(i, new Compressor(
+                    comp.getDisplayName(),
+                    comp.getLore(),
+                    comp.getMaterial(),
+                    comp.hasEnchantGlint(),
+                    comp.getLocation(),
+                    comp.getCompressions(),
+                    i
+            ));
+        }
+
+        FileConfiguration config = plugin.getCompressorConfig();
+        config.set("compressor" + (index + 1), null);
+        plugin.saveCompressorConfig(config);
+
+        refreshGUI();
     }
 }

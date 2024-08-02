@@ -1,0 +1,21 @@
+# This config file is where you can add your own custom compressors to the game.
+# Make each new compressor "compressor#", where # is a number incremented by 1 from the previous compressor.
+# MAKE SURE to include at least the display-name and material parameters for each compressor.
+
+compressor1:
+  display-name: §6§kaa§r§6 Auto Compressor §kaa§r
+  lore:
+    - '§7§oAutomatically compresses these items:'
+    - §3  Diamonds -> Block of Diamond
+    - §4  Redstone -> Block of Redstone
+    - §6  Gold -> Block of Gold
+    - §7  Iron -> Block of Iron
+  material: diamond_block
+  enchant-glint: true
+  location: OFFHAND
+compressor2:
+  display-name: §cCOmP
+  lore:
+    - It is unknown what this item will do when right clicked...
+  material: gold_ingot
+  enchant-glint: true

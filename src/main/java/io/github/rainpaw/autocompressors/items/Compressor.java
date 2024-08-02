@@ -15,6 +15,7 @@ public class Compressor {
     private final Material itemMaterial;
     private final boolean enchantGlint;
     private final CompressorItemManager.CompressorLocations location;
+    private final List<Compression> compressions;
     private final int index;
 
     public ItemStack getItemStack() {
@@ -48,6 +49,10 @@ public class Compressor {
         return index;
     }
 
+    public int getDisplayIndex() {
+        return index + 1;
+    }
+
     public String getDisplayName() {
         return displayName;
     }
@@ -68,13 +73,18 @@ public class Compressor {
         return location;
     }
 
+    public List<Compression> getCompressions() {
+        return compressions;
+    }
+
     /* Constructor */
-    public Compressor(String name, List<String> lore, Material material, boolean hasEnchantGlint, CompressorItemManager.CompressorLocations compressorLocation, int index) {
+    public Compressor(String name, List<String> lore, Material material, boolean hasEnchantGlint, CompressorItemManager.CompressorLocations compressorLocation, List<Compression> compressions, int index) {
         displayName = name;
         itemLore = lore;
         itemMaterial = material;
         enchantGlint = hasEnchantGlint;
         location = compressorLocation;
+        this.compressions = compressions;
         this.index = index;
     }
 

@@ -1,6 +1,5 @@
 package io.github.rainpaw.autocompressors.guis;
 
-import io.github.rainpaw.autocompressors.items.ModifiableCompressor;
 import io.github.rainpaw.autocompressors.utils.GUIUtils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -9,13 +8,11 @@ public class MaterialEnterGUI extends BaseGUI {
 
     private final CompressorEditGUI editGUI;
     private Material materialInSlot = null;
-    private final ModifiableCompressor compressor;
 
-    public MaterialEnterGUI(CompressorEditGUI editGUI, ModifiableCompressor compressor) {
+    public MaterialEnterGUI(CompressorEditGUI editGUI) {
         super(45, "Change Material", GUIUtils.GUIType.MATERIAL_ENTER);
 
         this.editGUI = editGUI;
-        this.compressor = compressor;
 
         refreshGUI();
     }
@@ -35,8 +32,7 @@ public class MaterialEnterGUI extends BaseGUI {
                 refreshGUI();
             });
             setItem(22, GUIUtils.createGuiItem("§aConfirm", Material.GREEN_TERRACOTTA, "§7This will change the compressor's", "§7material to this item.", "§7This is not permanent until you", "§7\"Save and Apply\" on the edit screen."), player -> {
-                compressor.setMaterial(materialInSlot);
-                editGUI.refreshGUI();
+                editGUI.setMaterial(materialInSlot);
                 close(player);
                 editGUI.open(player);
             });

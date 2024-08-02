@@ -20,33 +20,56 @@ public class CompressorItemManager {
     public static void initializeItems(AutoCompressors plugin) {
         compressors.clear();
 
-        FileConfiguration configuration = plugin.getConfig();
+        FileConfiguration configuration = plugin.getCompressorConfig();
 
-        for (int index = 1; configuration.get("compressors.compressor" + index) != null; index++) {
-            String configPath = "compressors.compressor" + index;
-
-            // Add §r (reset style) to beginning of each element in lore list
-            List<String> lore = configuration.getStringList(configPath + ".lore");
-            lore.replaceAll(s -> "§7"+s);
+        for (int index = 0; configuration.get("compressor" + (index + 1)) != null; index++) {
+            String configPath = "compressor" + (index + 1);
 
             Compressor compressor = new Compressor(
-                    "§f" + configuration.getString(configPath + ".display-name"),
-                    lore,
+                    configuration.getString(configPath + ".display-name"),
+                    configuration.getStringList(configPath + ".lore"),
                     Objects.requireNonNull(Material.matchMaterial(
                             Objects.requireNonNull(configuration.getString(configPath + ".material"),
                                     "Not every compressor has a material section.")),
                             "The config file contains a material that does not exist."),
-                    configuration.getBoolean(configPath + ".enchant-glint"),
+                    configuration.getBoolean(configPath + ".enchant-glint", false),
                     CompressorLocations.valueOf(configuration.getString(configPath + ".location", "INVENTORY").toUpperCase()),
+                    getCompressionList(configuration, configPath),
                     index
             );
             compressors.add(compressor);
         }
     }
 
+    private static List<Compression> getCompressionList(FileConfiguration config, String compressorConfigPath) {
+        List<Compression> compressionList = new ArrayList<>();
+
+        for (int index = 0; config.get(compressorConfigPath + ".compressions.compression" + (index + 1)) != null; index++) {
+            String configPath = compressorConfigPath + ".compressions.compression" + (index + 1);
+
+            compressionList.add(new Compression(
+                    config.getItemStack(configPath + ".start-item"),
+                    config.getItemStack(configPath + ".final-item"),
+                    config.getInt(configPath + ".start-amount"),
+                    config.getInt(configPath + ".final-amount"),
+                    index
+            ));
+        }
+
+        return compressionList;
+    }
+
     // Compressor getter
     public static Compressor getCompressor(int index) {
         return compressors.get(index);
+    }
+
+    public static void setCompressor(int index, Compressor compressor) {
+        compressors.set(index, compressor);
+    }
+
+    public static void addCompressor(Compressor compressor) {
+        compressors.add(compressor);
     }
 
     // Compressors list length getter

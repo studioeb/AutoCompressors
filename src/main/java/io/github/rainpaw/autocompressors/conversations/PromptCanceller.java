@@ -1,6 +1,6 @@
 package io.github.rainpaw.autocompressors.conversations;
 
-import io.github.rainpaw.autocompressors.guis.CompressorEditGUI;
+import io.github.rainpaw.autocompressors.guis.BaseGUI;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationCanceller;
 import org.bukkit.conversations.ConversationContext;
@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 public class PromptCanceller implements ConversationCanceller {
 
     private final Player player;
-    private final CompressorEditGUI editGUI;
+    private final BaseGUI gui;
 
     @Override
     public void setConversation(Conversation conversation) {
@@ -19,7 +19,7 @@ public class PromptCanceller implements ConversationCanceller {
     @Override
     public boolean cancelBasedOnInput(ConversationContext context, String input) {
         if (input.equalsIgnoreCase("exit")) {
-            editGUI.open(player);
+            gui.open(player);
             return true;
         } else {
             return false;
@@ -37,8 +37,8 @@ public class PromptCanceller implements ConversationCanceller {
         return conversationCanceller;
     }
 
-    public PromptCanceller(CompressorEditGUI editGUI, Player player) {
-        this.editGUI = editGUI;
+    public PromptCanceller(BaseGUI gui, Player player) {
+        this.gui = gui;
         this.player = player;
     }
 }

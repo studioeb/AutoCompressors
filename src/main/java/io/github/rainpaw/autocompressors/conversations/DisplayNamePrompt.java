@@ -1,7 +1,6 @@
 package io.github.rainpaw.autocompressors.conversations;
 
 import io.github.rainpaw.autocompressors.guis.CompressorEditGUI;
-import io.github.rainpaw.autocompressors.items.ModifiableCompressor;
 import org.bukkit.ChatColor;
 import org.bukkit.conversations.ConversationContext;
 import org.bukkit.conversations.Prompt;
@@ -12,8 +11,6 @@ public class DisplayNamePrompt extends StringPrompt {
 
     private final Player player;
 
-    private final ModifiableCompressor compressor;
-
     private final CompressorEditGUI editGUI;
 
     @Override
@@ -23,15 +20,13 @@ public class DisplayNamePrompt extends StringPrompt {
 
     @Override
     public Prompt acceptInput(ConversationContext context, String input) {
-        compressor.setDisplayName(ChatColor.translateAlternateColorCodes('&', input));
-        editGUI.refreshGUI();
+        editGUI.setDisplayName(ChatColor.translateAlternateColorCodes('&', input));
         editGUI.open(player);
         return null;
     }
 
-    public DisplayNamePrompt(Player player, ModifiableCompressor compressor, CompressorEditGUI editGUI) {
+    public DisplayNamePrompt(Player player, CompressorEditGUI editGUI) {
         this.editGUI = editGUI;
         this.player = player;
-        this.compressor = compressor;
     }
 }

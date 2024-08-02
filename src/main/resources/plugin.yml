@@ -9,7 +9,7 @@ commands:
   getcompressor:
     description: Gives player the specified auto compressor.
     usage: /<command>
-    aliases: [gc, givecompressor]
+    aliases: givecompressor
     permission: autocompressors.getcompressor
     permission-message: You don't have permission to run this command.
   autocompressorsreload:
@@ -21,6 +21,6 @@ commands:
   editcompressors:
     description: Opens a GUI allowing compressors to be edited in-game.
     usage: /<command>
-    aliases: ec
+    aliases: editcomps
     permission: autocompressors.editcompressors
     permission-message: You don't have permission to run this command.
