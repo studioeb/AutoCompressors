@@ -22,8 +22,20 @@ public class Compression {
         return startItem;
     }
 
+    public ItemStack getStartItem(int amount) {
+        ItemStack item = new ItemStack(startItem);
+        item.setAmount(amount);
+        return item;
+    }
+
     public ItemStack getFinalItem() {
         return finalItem;
+    }
+
+    public ItemStack getFinalItem(int amount) {
+        ItemStack item = new ItemStack(finalItem);
+        item.setAmount(amount);
+        return item;
     }
 
     public int getStartItemAmount() {
