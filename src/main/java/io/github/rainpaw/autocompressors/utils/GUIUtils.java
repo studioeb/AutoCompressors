@@ -17,7 +17,6 @@ public class GUIUtils {
     public static final Map<UUID, BaseGUI> inventoriesByUUID = new HashMap<>(); // Inv uuid + instance
     public static final Map<UUID, UUID> openInventories = new HashMap<>(); // Player UUID + inv UUID
 
-
     public enum GUIType {
         NORMAL,
         MATERIAL_ENTER,

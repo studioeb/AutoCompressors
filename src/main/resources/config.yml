@@ -1,4 +1,8 @@
 # AutoCompressors Config File
 
-# DO NOT CHANGE CONFIG VERSION
+# DO NOT CHANGE
 config-version: 1
+
+# Alternate color code character, used when entering text values in the /editcompressors screen.
+# If not specified, will default to "&"
+alternate-color-code-character: &

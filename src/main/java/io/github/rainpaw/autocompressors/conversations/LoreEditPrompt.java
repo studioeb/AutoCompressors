@@ -1,6 +1,7 @@
 package io.github.rainpaw.autocompressors.conversations;
 
 import io.github.rainpaw.autocompressors.guis.CompressorEditGUI;
+import io.github.rainpaw.autocompressors.items.CompressorItemManager;
 import org.bukkit.ChatColor;
 import org.bukkit.conversations.ConversationContext;
 import org.bukkit.conversations.Prompt;
@@ -18,11 +19,11 @@ public class LoreEditPrompt extends StringPrompt {
     @Override @Nonnull
     public String getPromptText(@Nonnull ConversationContext context) {
         if (lineNumber == 0) {
-            return "§aEnter lore for the new line, with \"&\" for color codes, or type \"exit\" to exit:";
+            return "§aEnter lore for the new line, with \"" + CompressorItemManager.getAlternateColorCode() + "\" for color codes, or type \"exit\" to exit:";
         } else if (lineNumber < 0) {
             return "§cAre you sure you want to delete line " + Math.abs(lineNumber) + "? (y/N)";
         } else {
-            return "§aEnter new lore for line " + lineNumber + ", with \"&\" for color codes, or type \"exit\" to exit:";
+            return "§aEnter new lore for line " + lineNumber + ", with \"" + CompressorItemManager.getAlternateColorCode() + "\" for color codes, or type \"exit\" to exit:";
         }
     }
 
@@ -33,9 +34,9 @@ public class LoreEditPrompt extends StringPrompt {
         } else if (lineNumber < 0) {
             return new LoreEditPrompt(lineNumber, player, editGUI);
         } else if (lineNumber == 0) {
-            editGUI.addToLore(ChatColor.translateAlternateColorCodes('&', input));
+            editGUI.addToLore(ChatColor.translateAlternateColorCodes(CompressorItemManager.getAlternateColorCode(), input));
         } else {
-            editGUI.setLoreAtLine(lineNumber - 1, ChatColor.translateAlternateColorCodes('&', input));
+            editGUI.setLoreAtLine(lineNumber - 1, ChatColor.translateAlternateColorCodes(CompressorItemManager.getAlternateColorCode(), input));
         }
         editGUI.open(player);
         return null;

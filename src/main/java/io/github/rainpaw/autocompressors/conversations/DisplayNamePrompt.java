@@ -1,6 +1,7 @@
 package io.github.rainpaw.autocompressors.conversations;
 
 import io.github.rainpaw.autocompressors.guis.CompressorEditGUI;
+import io.github.rainpaw.autocompressors.items.CompressorItemManager;
 import org.bukkit.ChatColor;
 import org.bukkit.conversations.ConversationContext;
 import org.bukkit.conversations.Prompt;
@@ -18,12 +19,12 @@ public class DisplayNamePrompt extends StringPrompt {
 
     @Override @Nonnull
     public String getPromptText(@Nonnull ConversationContext context) {
-        return "§aEnter new display name, with \"&\" for color codes, or type \"exit\" to quit:";
+        return "§aEnter new display name, with \"" + CompressorItemManager.getAlternateColorCode() + "\" for color codes, or type \"exit\" to quit:";
     }
 
     @Override
     public Prompt acceptInput(@Nonnull ConversationContext context, String input) {
-        editGUI.setDisplayName(ChatColor.translateAlternateColorCodes('&', input));
+        editGUI.setDisplayName(ChatColor.translateAlternateColorCodes(CompressorItemManager.getAlternateColorCode(), input));
         editGUI.open(player);
         return null;
     }

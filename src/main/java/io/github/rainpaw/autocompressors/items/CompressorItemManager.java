@@ -12,6 +12,8 @@ public class CompressorItemManager {
 
     private static final List<Compressor> compressors = new ArrayList<>();
 
+    private static char alternateColorCode;
+
     public enum CompressorLocations {
         INVENTORY,
         OFFHAND
@@ -19,6 +21,8 @@ public class CompressorItemManager {
 
     public static void initializeItems(AutoCompressors plugin) {
         compressors.clear();
+
+        alternateColorCode = plugin.getConfig().getString("alternate-color-code-character", "&").charAt(0);
 
         FileConfiguration configuration = plugin.getCompressorConfig();
 
@@ -57,6 +61,10 @@ public class CompressorItemManager {
         }
 
         return compressionList;
+    }
+
+    public static char getAlternateColorCode() {
+        return alternateColorCode;
     }
 
     // Compressor getter
