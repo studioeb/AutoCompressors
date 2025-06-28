@@ -1,9 +1,9 @@
-package io.github.rainpaw.autocompressors.guis;
+package io.github.studioeb.autocompressors.guis;
 
-import io.github.rainpaw.autocompressors.AutoCompressors;
-import io.github.rainpaw.autocompressors.items.Compressor;
-import io.github.rainpaw.autocompressors.items.CompressorItemManager;
-import io.github.rainpaw.autocompressors.utils.GUIUtils;
+import io.github.studioeb.autocompressors.AutoCompressors;
+import io.github.studioeb.autocompressors.items.Compressor;
+import io.github.studioeb.autocompressors.items.CompressorItemManager;
+import io.github.studioeb.autocompressors.utils.GUIUtils;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;

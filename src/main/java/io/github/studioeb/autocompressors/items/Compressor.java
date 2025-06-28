@@ -1,4 +1,4 @@
-package io.github.rainpaw.autocompressors.items;
+package io.github.studioeb.autocompressors.items;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;

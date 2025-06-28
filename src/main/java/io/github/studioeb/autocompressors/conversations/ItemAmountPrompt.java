@@ -1,6 +1,6 @@
-package io.github.rainpaw.autocompressors.conversations;
+package io.github.studioeb.autocompressors.conversations;
 
-import io.github.rainpaw.autocompressors.guis.CompressionEditGUI;
+import io.github.studioeb.autocompressors.guis.CompressionEditGUI;
 import org.bukkit.conversations.ConversationContext;
 import org.bukkit.conversations.NumericPrompt;
 import org.bukkit.conversations.Prompt;

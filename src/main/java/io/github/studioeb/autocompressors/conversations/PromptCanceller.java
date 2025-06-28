@@ -1,6 +1,6 @@
-package io.github.rainpaw.autocompressors.conversations;
+package io.github.studioeb.autocompressors.conversations;
 
-import io.github.rainpaw.autocompressors.guis.BaseGUI;
+import io.github.studioeb.autocompressors.guis.BaseGUI;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationCanceller;
 import org.bukkit.conversations.ConversationContext;

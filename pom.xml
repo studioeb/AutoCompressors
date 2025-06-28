@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>io.github.rainpaw</groupId>
+  <groupId>io.github.studioeb</groupId>
   <artifactId>AutoCompressors</artifactId>
   <version>1.0</version>
   <packaging>jar</packaging>
@@ -16,7 +16,7 @@
     <java.version>1.8</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-    <url>rainpaw.github.io</url>
+    <url>studioeb.github.io</url>
 
     <build>
     <plugins>

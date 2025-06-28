@@ -1,7 +1,7 @@
-package io.github.rainpaw.autocompressors.commands;
+package io.github.studioeb.autocompressors.commands;
 
-import io.github.rainpaw.autocompressors.AutoCompressors;
-import io.github.rainpaw.autocompressors.items.CompressorItemManager;
+import io.github.studioeb.autocompressors.AutoCompressors;
+import io.github.studioeb.autocompressors.items.CompressorItemManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

@@ -1,6 +1,6 @@
-package io.github.rainpaw.autocompressors.guis;
+package io.github.studioeb.autocompressors.guis;
 
-import io.github.rainpaw.autocompressors.utils.GUIUtils;
+import io.github.studioeb.autocompressors.utils.GUIUtils;
 import org.bukkit.Material;
 
 public class ConfirmGUI extends BaseGUI {

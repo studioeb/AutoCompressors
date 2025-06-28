@@ -1,7 +1,7 @@
-package io.github.rainpaw.autocompressors.conversations;
+package io.github.studioeb.autocompressors.conversations;
 
-import io.github.rainpaw.autocompressors.guis.CompressorEditGUI;
-import io.github.rainpaw.autocompressors.items.CompressorItemManager;
+import io.github.studioeb.autocompressors.guis.CompressorEditGUI;
+import io.github.studioeb.autocompressors.items.CompressorItemManager;
 import org.bukkit.ChatColor;
 import org.bukkit.conversations.ConversationContext;
 import org.bukkit.conversations.Prompt;

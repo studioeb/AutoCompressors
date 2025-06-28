@@ -1,6 +1,6 @@
-package io.github.rainpaw.autocompressors.items;
+package io.github.studioeb.autocompressors.items;
 
-import io.github.rainpaw.autocompressors.AutoCompressors;
+import io.github.studioeb.autocompressors.AutoCompressors;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 

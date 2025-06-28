@@ -1,7 +1,7 @@
-package io.github.rainpaw.autocompressors.utils;
+package io.github.studioeb.autocompressors.utils;
 
-import io.github.rainpaw.autocompressors.guis.BaseGUI;
-import io.github.rainpaw.autocompressors.items.Compressor;
+import io.github.studioeb.autocompressors.guis.BaseGUI;
+import io.github.studioeb.autocompressors.items.Compressor;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;

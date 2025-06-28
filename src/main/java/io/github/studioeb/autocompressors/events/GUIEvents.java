@@ -1,9 +1,9 @@
-package io.github.rainpaw.autocompressors.events;
+package io.github.studioeb.autocompressors.events;
 
-import io.github.rainpaw.autocompressors.guis.BaseGUI;
-import io.github.rainpaw.autocompressors.guis.ItemInsertGUI;
-import io.github.rainpaw.autocompressors.guis.MaterialEnterGUI;
-import io.github.rainpaw.autocompressors.utils.GUIUtils;
+import io.github.studioeb.autocompressors.guis.BaseGUI;
+import io.github.studioeb.autocompressors.guis.ItemInsertGUI;
+import io.github.studioeb.autocompressors.guis.MaterialEnterGUI;
+import io.github.studioeb.autocompressors.utils.GUIUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

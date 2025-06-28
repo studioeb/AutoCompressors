@@ -1,11 +1,11 @@
-package io.github.rainpaw.autocompressors;
+package io.github.studioeb.autocompressors;
 
-import io.github.rainpaw.autocompressors.commands.EditCompressorsCommand;
-import io.github.rainpaw.autocompressors.commands.GetCompressorCommand;
-import io.github.rainpaw.autocompressors.commands.ReloadCommand;
-import io.github.rainpaw.autocompressors.events.CompressEvent;
-import io.github.rainpaw.autocompressors.events.GUIEvents;
-import io.github.rainpaw.autocompressors.items.CompressorItemManager;
+import io.github.studioeb.autocompressors.commands.EditCompressorsCommand;
+import io.github.studioeb.autocompressors.commands.GetCompressorCommand;
+import io.github.studioeb.autocompressors.commands.ReloadCommand;
+import io.github.studioeb.autocompressors.events.CompressEvent;
+import io.github.studioeb.autocompressors.events.GUIEvents;
+import io.github.studioeb.autocompressors.items.CompressorItemManager;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;

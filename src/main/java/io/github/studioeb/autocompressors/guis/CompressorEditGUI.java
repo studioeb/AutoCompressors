@@ -1,13 +1,13 @@
-package io.github.rainpaw.autocompressors.guis;
+package io.github.studioeb.autocompressors.guis;
 
-import io.github.rainpaw.autocompressors.AutoCompressors;
-import io.github.rainpaw.autocompressors.conversations.DisplayNamePrompt;
-import io.github.rainpaw.autocompressors.conversations.LoreLinePrompt;
-import io.github.rainpaw.autocompressors.conversations.PromptCanceller;
-import io.github.rainpaw.autocompressors.items.Compression;
-import io.github.rainpaw.autocompressors.items.Compressor;
-import io.github.rainpaw.autocompressors.items.CompressorItemManager;
-import io.github.rainpaw.autocompressors.utils.GUIUtils;
+import io.github.studioeb.autocompressors.AutoCompressors;
+import io.github.studioeb.autocompressors.conversations.DisplayNamePrompt;
+import io.github.studioeb.autocompressors.conversations.LoreLinePrompt;
+import io.github.studioeb.autocompressors.conversations.PromptCanceller;
+import io.github.studioeb.autocompressors.items.Compression;
+import io.github.studioeb.autocompressors.items.Compressor;
+import io.github.studioeb.autocompressors.items.CompressorItemManager;
+import io.github.studioeb.autocompressors.utils.GUIUtils;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.conversations.Conversation;

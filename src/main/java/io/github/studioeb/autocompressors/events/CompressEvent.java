@@ -1,9 +1,8 @@
-package io.github.rainpaw.autocompressors.events;
+package io.github.studioeb.autocompressors.events;
 
-import io.github.rainpaw.autocompressors.items.Compression;
-import io.github.rainpaw.autocompressors.items.Compressor;
-import io.github.rainpaw.autocompressors.items.CompressorItemManager;
-import org.bukkit.Material;
+import io.github.studioeb.autocompressors.items.Compression;
+import io.github.studioeb.autocompressors.items.Compressor;
+import io.github.studioeb.autocompressors.items.CompressorItemManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,9 +10,7 @@ import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class CompressEvent implements Listener {
 

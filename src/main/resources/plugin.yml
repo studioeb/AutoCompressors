@@ -1,10 +1,10 @@
 name: AutoCompressors
-version: '${project.version}'
-main: io.github.rainpaw.autocompressors.AutoCompressors
-api-version: '1.20'
+version: "${project.version}"
+main: io.github.studioeb.autocompressors.AutoCompressors
+api-version: "1.20"
 authors: [rainpaw10]
 description: A Spigot plugin that adds highly customizable item compressors.
-website: rainpaw.github.io
+website: studioeb.github.io
 commands:
   getcompressor:
     description: Gives player the specified auto compressor.
