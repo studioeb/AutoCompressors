@@ -3,6 +3,6 @@
 # DO NOT CHANGE
 config-version: 1
 
-# Alternate color code character, used when entering text values in the /editcompressors screen.
+# Alternate color code character (in quotes), used when entering text values in the /editcompressors screen.
 # If not specified, will default to "&"
-alternate-color-code-character: &
+alternate-color-code-character: "&"
